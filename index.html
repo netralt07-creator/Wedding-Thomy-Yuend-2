@@ -1,0 +1,804 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Undangan Pernikahan Thomy & Yuend</title>
+    <link href="https://fonts.googleapis.com/css2?family=Great+Vibes&family=Playfair+Display:wght@400;700&family=Lato:wght@300;400;700&display=swap" rel="stylesheet">
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: 'Lato', sans-serif;
+            background: #0a0f1e;
+            color: #e2e8f0;
+            text-align: center;
+            overflow-x: hidden;
+        }
+
+        /* ===== SCROLL ANIMATIONS ===== */
+        .scroll-reveal {
+            opacity: 0;
+            transform: translateY(50px);
+            transition: all 0.8s ease-out;
+        }
+
+        .scroll-reveal.active {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .scroll-reveal-left {
+            opacity: 0;
+            transform: translateX(-100px);
+            transition: all 0.8s ease-out;
+        }
+
+        .scroll-reveal-left.active {
+            opacity: 1;
+            transform: translateX(0);
+        }
+
+        .scroll-reveal-right {
+            opacity: 0;
+            transform: translateX(100px);
+            transition: all 0.8s ease-out;
+        }
+
+        .scroll-reveal-right.active {
+            opacity: 1;
+            transform: translateX(0);
+        }
+
+        .scroll-reveal-scale {
+            opacity: 0;
+            transform: scale(0.5);
+            transition: all 0.8s ease-out;
+        }
+
+        .scroll-reveal-scale.active {
+            opacity: 1;
+            transform: scale(1);
+        }
+
+        /* ===== COVER ===== */
+        #cover {
+            position: fixed;
+            top: 0; left: 0;
+            width: 100%; height: 100vh;
+            background: linear-gradient(rgba(10,15,30,0.7), rgba(10,15,30,0.9)),
+                        url('foto1.jpg') center/cover;
+            background-attachment: fixed;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            z-index: 9999;
+            transition: transform 1s ease-in-out;
+        }
+
+        #cover.open { transform: translateY(-100%); }
+
+        .cover-content {
+            animation: fadeInDown 1.5s ease-out;
+        }
+
+        @keyframes fadeInDown {
+            from {
+                opacity: 0;
+                transform: translateY(-50px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .cover-content h4 {
+            color: #d4af37;
+            letter-spacing: 3px;
+            font-size: 1rem;
+            animation: fadeIn 2s ease-out 0.5s both;
+        }
+
+        .cover-content .nama {
+            font-family: 'Great Vibes', cursive;
+            font-size: 4rem;
+            color: #d4af37;
+            margin: 10px 0;
+            animation: fadeIn 2s ease-out 1s both;
+        }
+
+        .cover-content .dan {
+            font-family: 'Great Vibes', cursive;
+            font-size: 2.5rem;
+            color: #d4af37;
+            animation: fadeIn 2s ease-out 1.5s both;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        .btn-buka {
+            margin-top: 30px;
+            padding: 15px 40px;
+            background: linear-gradient(135deg, #d4af37, #f0d060);
+            color: #0a0f1e;
+            border: none;
+            border-radius: 50px;
+            font-weight: bold;
+            font-size: 1rem;
+            cursor: pointer;
+            animation: pulse 2s infinite;
+            transition: transform 0.3s;
+        }
+
+        .btn-buka:hover {
+            transform: scale(1.1);
+        }
+
+        @keyframes pulse {
+            0%, 100% { box-shadow: 0 0 0 0 rgba(212,175,55,0.7); }
+            50% { box-shadow: 0 0 0 20px rgba(212,175,55,0); }
+        }
+
+        /* ===== ISI ===== */
+        .container {
+            max-width: 700px;
+            margin: 0 auto;
+            padding: 30px 20px;
+        }
+
+        section {
+            margin-bottom: 60px;
+            padding: 40px 20px;
+            background: rgba(255,255,255,0.03);
+            border-radius: 15px;
+            border: 1px solid rgba(212,175,55,0.2);
+        }
+
+        h2 {
+            font-family: 'Playfair Display', serif;
+            color: #d4af37;
+            font-size: 2rem;
+            margin-bottom: 10px;
+        }
+
+        .sub {
+            font-family: 'Great Vibes', cursive;
+            color: #f0d060;
+            font-size: 1.5rem;
+            margin-bottom: 25px;
+        }
+
+        .ayat {
+            font-style: italic;
+            line-height: 1.8;
+            font-size: 1.1rem;
+        }
+
+        .ayat strong {
+            color: #d4af37;
+            font-style: normal;
+        }
+
+        .mempelai {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 20px;
+            align-items: center;
+        }
+
+        .orang {
+            flex: 1;
+            min-width: 250px;
+        }
+
+        .foto-profil {
+            width: 180px;
+            height: 180px;
+            border-radius: 50%;
+            border: 4px solid #d4af37;
+            object-fit: cover;
+            object-position: top;
+            margin-bottom: 15px;
+            transition: transform 0.5s;
+        }
+
+        .foto-profil:hover {
+            transform: scale(1.1) rotate(5deg);
+        }
+
+        .orang h3 {
+            font-family: 'Great Vibes', cursive;
+            color: #d4af37;
+            font-size: 2.5rem;
+        }
+
+        .orang .nama-lengkap {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.1rem;
+            color: white;
+            margin: 10px 0;
+        }
+
+        .orang p {
+            font-size: 0.9rem;
+            line-height: 1.5;
+        }
+
+        .ampersand {
+            font-family: 'Great Vibes', cursive;
+            font-size: 4rem;
+            color: #d4af37;
+            animation: float 3s ease-in-out infinite;
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-20px); }
+        }
+
+        .acara-card {
+            background: linear-gradient(135deg, #1a2744, #2a3f6f);
+            padding: 25px;
+            border-radius: 12px;
+            margin-bottom: 15px;
+            border-left: 5px solid #d4af37;
+            text-align: left;
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+
+        .acara-card:hover {
+            transform: translateX(10px);
+            box-shadow: 0 10px 30px rgba(212,175,55,0.3);
+        }
+
+        .acara-card h3 {
+            color: #d4af37;
+            font-size: 1.3rem;
+            margin-bottom: 15px;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+        }
+
+        .acara-card p {
+            margin-bottom: 10px;
+            font-size: 0.95rem;
+        }
+
+        .acara-card .label {
+            color: #d4af37;
+            font-weight: bold;
+        }
+
+        /* ===== PHOTO SLIDER ===== */
+        .slider-container {
+            position: relative;
+            max-width: 100%;
+            margin: 20px auto;
+            overflow: hidden;
+            border-radius: 15px;
+            border: 2px solid rgba(212,175,55,0.3);
+        }
+
+        .slider {
+            display: flex;
+            transition: transform 0.5s ease-in-out;
+        }
+
+        .slide {
+            min-width: 100%;
+            height: 300px;
+        }
+
+        .slide img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .slider-btn {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            background: rgba(212,175,55,0.8);
+            color: #0a0f1e;
+            border: none;
+            padding: 15px 20px;
+            cursor: pointer;
+            font-size: 1.5rem;
+            border-radius: 50%;
+            transition: all 0.3s;
+            z-index: 10;
+        }
+
+        .slider-btn:hover {
+            background: #d4af37;
+            transform: translateY(-50%) scale(1.1);
+        }
+
+        .slider-btn.prev { left: 10px; }
+        .slider-btn.next { right: 10px; }
+
+        .slider-dots {
+            position: absolute;
+            bottom: 15px;
+            left: 50%;
+            transform: translateX(-50%);
+            display: flex;
+            gap: 10px;
+        }
+
+        .dot {
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+            background: rgba(255,255,255,0.5);
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+
+        .dot.active {
+            background: #d4af37;
+            transform: scale(1.3);
+        }
+
+        /* ===== GALERI GRID ===== */
+        .galeri {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 10px;
+            margin-top: 20px;
+        }
+
+        .galeri img {
+            width: 100%;
+            height: 200px;
+            object-fit: cover;
+            border-radius: 10px;
+            border: 2px solid rgba(212,175,55,0.3);
+            transition: all 0.3s;
+            cursor: pointer;
+        }
+
+        .galeri img:hover {
+            transform: scale(1.05);
+            border-color: #d4af37;
+            box-shadow: 0 5px 20px rgba(212,175,55,0.4);
+        }
+
+        .galeri img:first-child {
+            grid-column: span 2;
+            height: 250px;
+        }
+
+        .keluarga {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 15px;
+            text-align: left;
+            font-size: 0.85rem;
+        }
+
+        @media (max-width: 600px) {
+            .keluarga { grid-template-columns: 1fr; }
+            .cover-content .nama { font-size: 3rem; }
+            .slide { height: 250px; }
+        }
+
+        .keluarga h4 {
+            color: #d4af37;
+            margin-bottom: 5px;
+            margin-top: 10px;
+        }
+
+        .keluarga h4:first-child { margin-top: 0; }
+
+        footer {
+            padding: 30px 20px;
+            font-size: 0.85rem;
+            color: #94a3b8;
+            border-top: 1px solid rgba(212,175,55,0.2);
+        }
+
+        footer .terima-kasih {
+            font-family: 'Great Vibes', cursive;
+            font-size: 2.5rem;
+            color: #d4af37;
+            margin-bottom: 10px;
+        }
+
+        /* ===== TOMBOL MUSIK ===== */
+        .music-control {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            width: 55px;
+            height: 55px;
+            background: linear-gradient(135deg, #d4af37, #f0d060);
+            border-radius: 50%;
+            border: none;
+            cursor: pointer;
+            z-index: 1000;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 4px 15px rgba(212,175,55,0.4);
+            transition: all 0.3s;
+        }
+
+        .music-control:hover {
+            transform: scale(1.1);
+        }
+
+        .music-control.playing {
+            animation: rotate 3s linear infinite;
+        }
+
+        @keyframes rotate {
+            from { transform: rotate(0deg); }
+            to { transform: rotate(360deg); }
+        }
+
+        .music-icon {
+            font-size: 1.5rem;
+            color: #0a0f1e;
+        }
+
+        /* ===== SCROLL TO TOP ===== */
+        .scroll-top {
+            position: fixed;
+            bottom: 20px;
+            left: 20px;
+            width: 50px;
+            height: 50px;
+            background: #d4af37;
+            border-radius: 50%;
+            border: none;
+            cursor: pointer;
+            z-index: 1000;
+            display: none;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+            color: #0a0f1e;
+            transition: all 0.3s;
+        }
+
+        .scroll-top:hover {
+            transform: scale(1.1);
+        }
+
+        .scroll-top.show {
+            display: flex;
+        }
+
+        /* ===== PROGRESS BAR ===== */
+        .progress-bar {
+            position: fixed;
+            top: 0;
+            left: 0;
+            height: 4px;
+            background: linear-gradient(90deg, #d4af37, #f0d060);
+            z-index: 1001;
+            transition: width 0.3s;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Progress Bar -->
+    <div class="progress-bar" id="progressBar"></div>
+
+    <!-- Audio Player -->
+    <audio id="bgMusic" loop>
+        <source src="lagu.mp3" type="audio/mpeg">
+    </audio>
+
+    <!-- Cover -->
+    <div id="cover">
+        <div class="cover-content">
+            <h4>SAVE THE DATE</h4>
+            <p style="margin: 10px 0;">Jumat, 16 Oktober 2026</p>
+            <div class="nama">Thomy</div>
+            <div class="dan">&</div>
+            <div class="nama">Yuend</div>
+            <p style="margin-top: 30px;">Kepada Yth.<br>Bapak/Ibu/Saudara/i</p>
+            <button class="btn-buka" onclick="bukaUndangan()">💌 Buka Undangan</button>
+        </div>
+    </div>
+
+    <!-- Isi Undangan -->
+    <div class="container">
+
+        <!-- Ayat -->
+        <section class="scroll-reveal">
+            <p class="ayat">
+                "Aku senantiasa mengucap syukur kepada Allahku karena kamu atas kasih karunia Allah yang dianugerahkan-Nya kepada kamu dalam Kristus Yesus."
+            </p>
+            <p class="ayat"><strong>— 1 Korintus 1:4 —</strong></p>
+        </section>
+
+        <!-- Photo Slider -->
+        <section class="scroll-reveal-scale">
+            <h2>Momen Indah</h2>
+            <div class="sub">Our Journey</div>
+
+            <div class="slider-container">
+                <div class="slider" id="slider">
+                    <div class="slide"><img src="foto1.jpg" alt="Foto 1"></div>
+                    <div class="slide"><img src="foto2.jpg" alt="Foto 2"></div>
+                    <div class="slide"><img src="foto3.jpg" alt="Foto 3"></div>
+                    <div class="slide"><img src="foto4.jpg" alt="Foto 4"></div>
+                    <div class="slide"><img src="foto5.jpg" alt="Foto 5"></div>
+                </div>
+                <button class="slider-btn prev" onclick="changeSlide(-1)"></button>
+                <button class="slider-btn next" onclick="changeSlide(1)">❯</button>
+                <div class="slider-dots" id="sliderDots"></div>
+            </div>
+        </section>
+
+        <!-- Mempelai -->
+        <section>
+            <h2 class="scroll-reveal">Mempelai</h2>
+            <div class="sub scroll-reveal">The Bride & Groom</div>
+
+            <div class="mempelai">
+                <div class="orang scroll-reveal-left">
+                    <img src="foto-thomy.jpg" alt="Thomy" class="foto-profil">
+                    <h3>Thomy</h3>
+                    <div class="nama-lengkap">Thomy Abraham Neolaka, S.Kom</div>
+                    <p>Putra pertama anak ke tiga dari lima bersaudara</p>
+                    <p style="margin-top: 10px;">
+                        Putra dari:<br>
+                        <strong>Bapak Frans Neolaka (Alm)</strong><br>
+                        &<br>
+                        <strong>Ibu Janse Balukh</strong>
+                    </p>
+                </div>
+
+                <div class="ampersand scroll-reveal-scale">&</div>
+
+                <div class="orang scroll-reveal-right">
+                    <img src="foto-yuend.jpg" alt="Yuend" class="foto-profil">
+                    <h3>Yuend</h3>
+                    <div class="nama-lengkap">Yuni Andriyani Henuk, S.E</div>
+                    <p>Putri tunggal, anak pertama dari tiga bersaudara</p>
+                    <p style="margin-top: 10px;">
+                        Putri dari:<br>
+                        <strong>Bapak Yusuf Nahum Urbanus Henuk</strong><br>
+                        &<br>
+                        <strong>Ibu Ernawati Sodakain</strong>
+                    </p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Acara -->
+        <section>
+            <h2 class="scroll-reveal">Acara Pernikahan</h2>
+            <div class="sub scroll-reveal">Wedding Event</div>
+            <p class="scroll-reveal" style="font-size: 1.3rem; margin-bottom: 20px; color: white;">Jumat, 16 Oktober 2026</p>
+
+            <div class="acara-card scroll-reveal-left">
+                <h3>💒 Pemberkatan</h3>
+                <p><span class="label">Waktu:</span> Pukul 10.00 WITA</p>
+                <p><span class="label">Tempat:</span> GMIT Benyamin Oebufu</p>
+                <p><span class="label">Alamat:</span> Jl. Rukun No. 1, Kelurahan Oebufu</p>
+            </div>
+
+            <div class="acara-card scroll-reveal-right">
+                <h3> Resepsi</h3>
+                <p><span class="label">Waktu:</span> Pukul 18.00 WITA</p>
+                <p><span class="label">Tempat:</span> Rumah Bapak Yusuf N. U. Henuk</p>
+                <p><span class="label">Alamat:</span> RT 08/RW 02 Kelurahan Oebufu</p>
+            </div>
+        </section>
+
+        <!-- Galeri -->
+        <section>
+            <h2 class="scroll-reveal">Galeri Foto</h2>
+            <div class="sub scroll-reveal">Our Moments</div>
+
+            <div class="galeri">
+                <img src="foto1.jpg" alt="Foto 1" class="scroll-reveal-scale">
+                <img src="foto2.jpg" alt="Foto 2" class="scroll-reveal">
+                <img src="foto3.jpg" alt="Foto 3" class="scroll-reveal">
+                <img src="foto4.jpg" alt="Foto 4" class="scroll-reveal">
+                <img src="foto5.jpg" alt="Foto 5" class="scroll-reveal">
+            </div>
+        </section>
+
+        <!-- Keluarga -->
+        <section>
+            <h2 class="scroll-reveal">Turut Mengundang</h2>
+            <div class="sub scroll-reveal">The Families</div>
+
+            <div class="keluarga">
+                <div class="scroll-reveal-left">
+                    <h4>Keluarga Besar Neolaka</h4>
+                    <h4>Keluarga Besar Balukh</h4>
+                    <h4>Keluarga Bapak Marthen Tameno</h4>
+                    <h4>Keluarga Bapak Abraham S. M. Selly, S.Sos,M.Si</h4>
+                </div>
+                <div class="scroll-reveal-right">
+                    <h4>Keluarga Besar Henuk</h4>
+                    <h4>Keluarga Besar Sodakain</h4>
+                    <h4>Keluarga Besar Elik</h4>
+                    <h4>Keluarga Besar Manafe</h4>
+                    <h4>Keluarga Besar Olang</h4>
+                    <h4>Keluarga Bapak Drs. Johanis Munan</h4>
+                    <h4>Keluarga Bapak Dr. Henry Z. Kotta, S.T.,M.T</h4>
+                </div>
+            </div>
+
+            <p class="scroll-reveal" style="margin-top: 25px; font-style: italic; line-height: 1.6;">
+                "Sukacita kami menjadi sempurna dengan kehadiran dan doa restu dari Bapak/Ibu/Saudara/i bagi putra-putri kami."
+            </p>
+        </section>
+
+    </div>
+
+    <footer class="scroll-reveal">
+        <div class="terima-kasih">Thomy & Yuend</div>
+        <p>Mohon maaf apabila ada salah dalam penulisan nama/gelar</p>
+        <p style="margin-top: 10px;">Design By: Thomy Neo & Netral.T</p>
+    </footer>
+
+    <!-- Tombol Musik -->
+    <button class="music-control" id="musicBtn" onclick="toggleMusic()">
+        <span class="music-icon">🎵</span>
+    </button>
+
+    <!-- Scroll to Top -->
+    <button class="scroll-top" id="scrollTop" onclick="scrollToTop()">↑</button>
+
+    <script>
+        // ===== SCROLL REVEAL ANIMATION =====
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: "0px 0px -50px 0px"
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('active');
+                }
+            });
+        }, observerOptions);
+
+        document.querySelectorAll('.scroll-reveal, .scroll-reveal-left, .scroll-reveal-right, .scroll-reveal-scale')
+            .forEach(el => observer.observe(el));
+
+        // ===== PROGRESS BAR =====
+        window.addEventListener('scroll', () => {
+            const winScroll = document.body.scrollTop || document.documentElement.scrollTop;
+            const height = document.documentElement.scrollHeight - document.documentElement.clientHeight;
+            const scrolled = (winScroll / height) * 100;
+            document.getElementById('progressBar').style.width = scrolled + '%';
+
+            // Show/hide scroll to top button
+            const scrollTop = document.getElementById('scrollTop');
+            if (winScroll > 300) {
+                scrollTop.classList.add('show');
+            } else {
+                scrollTop.classList.remove('show');
+            }
+        });
+
+        // ===== PHOTO SLIDER =====
+        let currentSlide = 0;
+        const slides = document.querySelectorAll('.slide');
+        const totalSlides = slides.length;
+        const slider = document.getElementById('slider');
+        const dotsContainer = document.getElementById('sliderDots');
+
+        // Create dots
+        for (let i = 0; i < totalSlides; i++) {
+            const dot = document.createElement('div');
+            dot.classList.add('dot');
+            if (i === 0) dot.classList.add('active');
+            dot.onclick = () => goToSlide(i);
+            dotsContainer.appendChild(dot);
+        }
+
+        function updateSlider() {
+            slider.style.transform = `translateX(-${currentSlide * 100}%)`;
+            
+            // Update dots
+            document.querySelectorAll('.dot').forEach((dot, index) => {
+                dot.classList.toggle('active', index === currentSlide);
+            });
+        }
+
+        function changeSlide(direction) {
+            currentSlide = (currentSlide + direction + totalSlides) % totalSlides;
+            updateSlider();
+        }
+
+        function goToSlide(index) {
+            currentSlide = index;
+            updateSlider();
+        }
+
+        // Auto slide
+        setInterval(() => {
+            changeSlide(1);
+        }, 5000);
+
+        // Touch/Swipe support for mobile
+        let touchStartX = 0;
+        let touchEndX = 0;
+
+        slider.addEventListener('touchstart', (e) => {
+            touchStartX = e.changedTouches[0].screenX;
+        });
+
+        slider.addEventListener('touchend', (e) => {
+            touchEndX = e.changedTouches[0].screenX;
+            handleSwipe();
+        });
+
+        function handleSwipe() {
+            const swipeThreshold = 50;
+            const diff = touchStartX - touchEndX;
+            
+            if (Math.abs(diff) > swipeThreshold) {
+                if (diff > 0) {
+                    changeSlide(1); // Swipe left
+                } else {
+                    changeSlide(-1); // Swipe right
+                }
+            }
+        }
+
+        // ===== MUSIC CONTROL =====
+        let isPlaying = false;
+        const music = document.getElementById('bgMusic');
+        const musicBtn = document.getElementById('musicBtn');
+
+        function bukaUndangan() {
+            document.getElementById('cover').classList.add('open');
+            playMusic();
+        }
+
+        function playMusic() {
+            music.play().then(() => {
+                isPlaying = true;
+                musicBtn.classList.add('playing');
+            }).catch(error => {
+                console.log('Autoplay blocked:', error);
+            });
+        }
+
+        function toggleMusic() {
+            if (isPlaying) {
+                music.pause();
+                isPlaying = false;
+                musicBtn.classList.remove('playing');
+            } else {
+                music.play();
+                isPlaying = true;
+                musicBtn.classList.add('playing');
+            }
+        }
+
+        // ===== SCROLL TO TOP =====
+        function scrollToTop() {
+            window.scrollTo({
+                top: 0,
+                behavior: 'smooth'
+            });
+        }
+    </script>
+</body>
+</html>
